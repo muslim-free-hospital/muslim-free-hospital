@@ -1,31 +1,24 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Loading from "./Components/Loading";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import Loading from "./Components/Loading";
-import Slider from "./Components/Slider";
-import About from "./Components/About";
-import Department from "./Components/Department";
-import Gallery from "./Components/Gallery";
-import Startup from "./Components/Startup";
-import Team from "./Components/Team";
-import AppointmentForm from "./Components/AppointmentForm";
-import Blog from "./Components/Blog";
-import axios from "axios";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setArticles } from "./store";
+import BlogPage from "./pages/BlogPage";
+import { BlogDetailPage } from "./pages/BlogDetailPage";
 
 function App() {
-  const dispatch = useDispatch();
-  const articles = useSelector((state) => state.articles);
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
-      console.log(res.data);
-      dispatch(setArticles(res.data));
-    }, [articles]);
-  });
-
-  return (<></>
-  )
+  return (
+    <>
+      <Loading />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/articles" element={<BlogPage />} />
+        <Route path="/articles/:id" element={<BlogDetailPage />} />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

@@ -1,4 +1,34 @@
+import { useFetchArticlesQuery } from "../store";
+
 export default function Blog() {
+  const { data } = useFetchArticlesQuery();
+  // get only 3 articles
+  const threeArticles = data && data.records.slice(0, 3);
+  if (!threeArticles) return null;
+  else console.log(threeArticles);
+  function articlesMapper(articles) {
+    return articles.map((article) => {
+      return (
+        <div key={article.title} className="col-xl-4 col-lg-4 col-md-6">
+          <div className="single-blogs mb-30">
+            <div className="blog-img">
+              <img src={article.photo_url} alt="" />
+            </div>
+            <div className="blogs-cap">
+              <div className="date-info">
+                <span>{article.title}</span>
+                <p>{article.description}</p>
+              </div>
+              <h4>
+                <a href="blog_details.html">{article.title}</a>
+              </h4>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
   return (
     <>
       <div className="home_blog-area section-padding30">
@@ -12,69 +42,7 @@ export default function Blog() {
             </div>
           </div>
           <div className="row">
-            <div className="col-xl-4 col-lg-4 col-md-6">
-              <div className="single-blogs mb-30">
-                <div className="blog-img">
-                  <img src="/img/gallery/blog1.png" alt="" />
-                </div>
-                <div className="blogs-cap">
-                  <div className="date-info">
-                    <span>Health</span>
-                    <p>Nov 30, 2020</p>
-                  </div>
-                  <h4>
-                    <a href="blog_details.html">
-                      Amazing Places To Visit In Summer
-                    </a>
-                  </h4>
-                  <a href="blog_details.html" className="read-more1">
-                    Read more
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-lg-4 col-md-6">
-              <div className="single-blogs mb-30">
-                <div className="blog-img">
-                  <img src="/img/gallery/blog2.png" alt="" />
-                </div>
-                <div className="blogs-cap">
-                  <div className="date-info">
-                    <span>Checkup</span>
-                    <p>Nov 30, 2020</p>
-                  </div>
-                  <h4>
-                    <a href="blog_details.html">
-                      Developing Creativithout Losing Visual
-                    </a>
-                  </h4>
-                  <a href="blog_details.html" className="read-more1">
-                    Read more
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-lg-4 col-md-6">
-              <div className="single-blogs mb-30">
-                <div className="blog-img">
-                  <img src="/img/gallery/blog3.png" alt="" />
-                </div>
-                <div className="blogs-cap">
-                  <div className="date-info">
-                    <span>Operation</span>
-                    <p>Nov 30, 2020</p>
-                  </div>
-                  <h4>
-                    <a href="blog_details.html">
-                      Winter Photography Tips from Glenn
-                    </a>
-                  </h4>
-                  <a href="blog_details.html" className="read-more1">
-                    Read more
-                  </a>
-                </div>
-              </div>
-            </div>
+            {threeArticles && articlesMapper(threeArticles)}
           </div>
         </div>
       </div>

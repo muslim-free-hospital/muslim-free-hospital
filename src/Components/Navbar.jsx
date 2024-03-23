@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <header>
@@ -18,7 +20,7 @@ export default function Navbar() {
                     <nav>
                       <ul id="navigation">
                         <li>
-                          <a href="index.html">Home</a>
+                          <Link to="/">Home</Link>
                         </li>
                         <li>
                           <a href="about.html">About</a>
@@ -33,7 +35,7 @@ export default function Navbar() {
                           <a href="blog.html">Blog</a>
                           <ul className="submenu">
                             <li>
-                              <a href="blog.html">Blog</a>
+                              <Link to="/articles">Blog</Link>
                             </li>
                             <li>
                               <a href="blog_details.html">Blog Details</a>

@@ -1,26 +1,37 @@
 import { ShimmerCategoryList } from "react-shimmer-effects";
 import ArticleListItem from "../Components/ArticleListItem";
 import { useFetchArticlesQuery } from "../store";
+import ReactPaginate from 'react-paginate';
+import { useState } from "react";
+
 
 export default function BlogPage() {
   const { data } = useFetchArticlesQuery();
+  const [articles, setArticles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [perPage] = useState(5); // Number of items per page
+  const [hashtagFilters, setHashtagFilters] = useState([]);
+  const [selectedHashtag, setSelectedHashtag] = useState('');
+
   if (!data)
     return <ShimmerCategoryList title items={6} categoryStyle="STYLE_TWO" />;
 
-  function paginate(records, pageNumber, pageSize) {
-    const startIndex = (pageNumber - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const totalPages = Math.ceil(records.length / pageSize);
-    const currentPage = Math.min(Math.max(1, pageNumber), totalPages); // Ensure current page is within valid range
+  // Pagination logic
+  const offset = currentPage * perPage;
+  const pageCount = Math.ceil(data.records.length / perPage);
+  const paginatedArticles = data.records.slice(offset, offset + perPage);
 
-    return {
-      currentPage,
-      totalPages,
-      data: records.slice(startIndex, endIndex),
-    };
-  }
+  // Handle page change
+  const handlePageClick = (selected) => {
+    setCurrentPage(selected);
+    window.scrollTo(0, 0);
+  };
 
-  const paginationResult = paginate(data.records, 1, 5);
+  // Handle hashtag filter change
+  const handleHashtagChange = (e) => {
+    setSelectedHashtag(e.target.value);
+    setCurrentPage(0); // Reset page when changing filter
+  };
 
   return (
     <main>
@@ -29,45 +40,25 @@ export default function BlogPage() {
           <div className="row">
             <div className="col-lg-8 mb-5 mb-lg-0">
               <div className="blog_left_sidebar">
-                {paginationResult.data.map((article) => (
+                {paginatedArticles.map((article) => (
                   <ArticleListItem key={article.title} article={article} />
                 ))}
                 <nav className="blog-pagination justify-content-center d-flex">
                   <ul className="pagination">
                     <li className="page-item">
-                      <a href="#" className="page-link" aria-label="Previous">
+                      <button onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 0} className="page-link" aria-label="Previous">
                         <i className="ti-angle-left"></i>
-                      </a>
+                      </button>
                     </li>
-                    {[...Array(paginationResult.totalPages).keys()].map(
-                      (number) => (
-                        (number = number + 1),
-                        (
-                          <li
-                            key={number}
-                            className={`page-item ${
-                              paginationResult.currentPage === number
-                                ? "active"
-                                : ""
-                            }`}
-                          >
-                            <a
-                              href="#"
-                              className="page-link"
-                              onClick={() => {
-                                paginate(data.records, number, 5);
-                              }}
-                            >
-                              {number}
-                            </a>
-                          </li>
-                        )
-                      )
-                    )}
                     <li className="page-item">
-                      <a href="#" className="page-link" aria-label="Next">
+                      <button className="page-link" aria-label="Next">
+                        {currentPage + 1} / {pageCount}
+                      </button>
+                    </li>
+                    <li className="page-item">
+                      <button onClick={() => handlePageClick(currentPage + 1)} disabled={currentPage === pageCount - 1}  className="page-link" aria-label="Next">
                         <i className="ti-angle-right"></i>
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </nav>
@@ -103,44 +94,15 @@ export default function BlogPage() {
                   <h4 className="widget_title" style={{ color: "#2d2d2d" }}>
                     Category
                   </h4>
-                  <ul className="list cat-list">
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Resaurant food</p>
-                        <p>(37)</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Travel news</p>
-                        <p>(10)</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Modern technology</p>
-                        <p>(03)</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Product</p>
-                        <p>(11)</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Inspiration</p>
-                        <p>21</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="d-flex">
-                        <p>Health Care (21)</p>
-                        <p>09</p>
-                      </a>
-                    </li>
-                  </ul>
+                  {/* <ul className="list cat-list">
+                    {hashtagFilters.map((hashtag) => (  
+                      <li>
+                        <a href="#" className="d-flex">
+                          <p>{hashtag}</p>
+                        </a>
+                      </li>
+                    ))}
+                  </ul> */}
                 </aside>
               </div>
             </div>

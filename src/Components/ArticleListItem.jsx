@@ -20,11 +20,11 @@ export default function ArticleListItem({ article }) {
         </div>
         <div className="blog_details">
           <Link to={`/articles/${article.id}`}>
-            <a className="d-inline-block">
+            <span className="d-inline-block">
               <h2 className="blog-head" style={{ color: "#2d2d2d" }}>
                 {article.title}
               </h2>
-            </a>
+            </span>
           </Link>
           <p>{article.description}</p>
           <ul className="blog-info-link">

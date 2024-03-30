@@ -1,7 +1,7 @@
 export default function about() {
   return (
     <>
-      <div className="about-area section-padding2">
+      <div id="about" className="about-area section-padding2">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-10">
@@ -11,25 +11,23 @@ export default function about() {
                   <h2>Welcome To Our Hospital</h2>
                 </div>
                 <p>
-                  There arge many variations ohf pacgssages of sorem gpsum
-                  ilable, but the majority have suffered alteration in some
-                  form, by ected humour, or randomised words whi.
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged. It was popularised in the 1960s with
+                  the release of Letraset sheets containing Lorem Ipsum
+                  passages, and more recently with desktop publishing software
+                  like Aldus PageMaker including versions of Lorem Ipsum. Lorem
+                  Ipsum is simply dummy text of the printing and typesetting
+                  industry. Lorem Ipsum has been the industry standard dummy
+                  text ever since the 1500s, when an unknown printer took a
+                  galley of type and scrambled it to make a type specimen book.
+                  It has survived not only five centuries, but also the leap
+                  into electronic typesetting, remaining essentially unchanged.
                 </p>
-                <div className="about-btn1 mb-30">
-                  <a href="about.html" className="btn about-btn">
-                    Find Doctors .<i className="ti-arrow-right"></i>
-                  </a>
-                </div>
-                <div className="about-btn1 mb-30">
-                  <a href="about.html" className="btn about-btn2">
-                    Appointment <i className="ti-arrow-right"></i>
-                  </a>
-                </div>
-                <div className="about-btn1 mb-30">
-                  <a href="about.html" className="btn about-btn2">
-                    Emargency 1 <i className="ti-arrow-right"></i>
-                  </a>
-                </div>
               </div>
             </div>
             <div className="col-lg-6 col-md-12">

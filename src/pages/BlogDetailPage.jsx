@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useFindArticleByIdQuery } from "../store";
+import { ShimmerPostDetails } from "react-shimmer-effects";
 
 export const BlogDetailPage = () => {
   const { id } = useParams();
   const { data } = useFindArticleByIdQuery(id);
-  if (!data) return null;
+  if (!data) return <ShimmerPostDetails />;
 
   return (
     <>

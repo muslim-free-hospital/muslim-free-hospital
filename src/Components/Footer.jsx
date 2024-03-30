@@ -46,7 +46,7 @@ export default function Footer() {
                     <div id="mc_embed_signup">
                       <form
                         target="_blank"
-                        action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                        action="#"
                         method="get"
                         className="subscribe_form relative mail_part"
                         noValidate={true}

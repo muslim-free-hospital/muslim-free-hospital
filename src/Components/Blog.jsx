@@ -1,4 +1,6 @@
+import moment from "moment/moment";
 import { useFetchArticlesQuery } from "../store";
+import { Link } from "react-router-dom";
 
 export default function Blog() {
   const { data } = useFetchArticlesQuery();
@@ -16,11 +18,11 @@ export default function Blog() {
             </div>
             <div className="blogs-cap">
               <div className="date-info">
-                <span>{article.title}</span>
-                <p>{article.description}</p>
+                <span>{article.tag}</span>
+                <p>{moment(article.created_date).format("LL")}</p>
               </div>
               <h4>
-                <a href="blog_details.html">{article.title}</a>
+                <Link to={`/articles/${article.id}`}>{article.title}</Link>
               </h4>
             </div>
           </div>

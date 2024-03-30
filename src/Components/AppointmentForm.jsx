@@ -1,7 +1,24 @@
+import { useState } from "react";
+import { useSendMessageMutation } from "../store";
+
 export default function AppointmentForm() {
+  const [sendMessage, results] = useSendMessageMutation();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    sendMessage(formData);
+  }
   return (
     <>
-      <div className="contact-form-main">
+      <div id="contact" className="container contact-form-main">
         <div className="container">
           <div className="row justify-content-end">
             <div className="col-xl-7 col-lg-7">
@@ -11,40 +28,37 @@ export default function AppointmentForm() {
                     <div className="col-xl-12">
                       <div className="section-tittle section-tittle2">
                         <span>Appointment Apply Form</span>
-                        <h2>Appointment Form</h2>
+                        <h2>Contact Us</h2>
                       </div>
                     </div>
                   </div>
                 </div>
-                <form id="contact-form" action="#" method="POST">
+                <form
+                  onSubmit={handleFormSubmit}
+                  id="contact-form"
+                  action="#"
+                  method="POST"
+                >
                   <div className="row">
-                    <div className="col-lg-6 col-md-6">
+                    <div className="col-lg-12">
                       <div className="form-box user-icon mb-30">
-                        <input type="text" name="name" placeholder="Name" />
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                      <div className="form-box email-icon mb-30">
-                        <input type="text" name="email" placeholder="Phone" />
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 mb-30">
-                      <div className="select-itms">
-                        <select name="select" id="select2">
-                          <option value="">Health Law</option>
-                          <option value="">saiful islam</option>
-                          <option value="">Arafath Miya</option>
-                          <option value="">Shakil Miya</option>
-                          <option value="">Tamim Sharker</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                      <div className="form-box subject-icon mb-30">
                         <input
-                          type="Email"
-                          name="subject"
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="form-box mb-30">
+                        <input
+                          type="email"
+                          name="email"
                           placeholder="Email"
+                          onChange={handleChange}
+                          required
                         />
                       </div>
                     </div>
@@ -54,11 +68,14 @@ export default function AppointmentForm() {
                           name="message"
                           id="message"
                           placeholder="Message"
+                          onChange={handleChange}
+                          required
                         ></textarea>
                       </div>
                       <div className="submit-info">
                         <button className="btn" type="submit">
-                          Submit Now <i className="ti-arrow-right"></i>{" "}
+                          {results.isLoading ? "Sending..." : "Submit Now "}
+                          <i className="ti-arrow-right"></i>{" "}
                         </button>
                       </div>
                     </div>

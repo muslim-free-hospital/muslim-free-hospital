@@ -1,3 +1,5 @@
+import { galleries } from "../utils/constant";
+
 export default function galler() {
   return (
     <>
@@ -7,7 +9,7 @@ export default function galler() {
             <div className="col-lg-6">
               <div className="section-tittle text-center mb-100">
                 <span>Our Gellary</span>
-                <h2 style={{color: "white"}}>Our Medical Camp</h2>
+                <h2 style={{ color: "white" }}>Our Medical Camp</h2>
               </div>
             </div>
           </div>
@@ -18,7 +20,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img big-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery1.png")`}}
+                      style={{ backgroundImage: `url(${galleries.ONE})` }}
                     ></div>
                   </div>
                 </div>
@@ -26,7 +28,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img small-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery2.png")`}}
+                      style={{ backgroundImage: `url(${galleries.TWO})` }}
                     ></div>
                   </div>
                 </div>
@@ -34,7 +36,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img small-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery3.png")`}}
+                      style={{ backgroundImage: `url(${galleries.THREE})` }}
                     ></div>
                   </div>
                 </div>
@@ -47,7 +49,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img small-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery4.png")`}}
+                      style={{ backgroundImage: `url(${galleries.FOUR})` }}
                     ></div>
                   </div>
                 </div>
@@ -55,7 +57,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img small-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery5.png")`}}
+                      style={{ backgroundImage: `url(${galleries.FIVE})` }}
                     ></div>
                   </div>
                 </div>
@@ -63,7 +65,7 @@ export default function galler() {
                   <div className="single-gallery mb-30">
                     <div
                       className="gallery-img big-img"
-                      style={{backgroundImage: `url("/img/gallery/gallery6.png")`}}
+                      style={{ backgroundImage: `url(${galleries.SIX})` }}
                     ></div>
                   </div>
                 </div>

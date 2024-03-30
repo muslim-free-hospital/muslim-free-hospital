@@ -1,17 +1,15 @@
 import { ShimmerCategoryList } from "react-shimmer-effects";
 import ArticleListItem from "../Components/ArticleListItem";
 import { useFetchArticlesQuery } from "../store";
-import ReactPaginate from 'react-paginate';
 import { useState } from "react";
-
 
 export default function BlogPage() {
   const { data } = useFetchArticlesQuery();
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [perPage] = useState(5); // Number of items per page
-  const [hashtagFilters, setHashtagFilters] = useState([]);
-  const [selectedHashtag, setSelectedHashtag] = useState('');
+  // const [hashtagFilters, setHashtagFilters] = useState([]);
+  // const [selectedHashtag, setSelectedHashtag] = useState('');
 
   if (!data)
     return <ShimmerCategoryList title items={6} categoryStyle="STYLE_TWO" />;
@@ -28,10 +26,10 @@ export default function BlogPage() {
   };
 
   // Handle hashtag filter change
-  const handleHashtagChange = (e) => {
-    setSelectedHashtag(e.target.value);
-    setCurrentPage(0); // Reset page when changing filter
-  };
+  // const handleHashtagChange = (e) => {
+  //   setSelectedHashtag(e.target.value);
+  //   setCurrentPage(0); // Reset page when changing filter
+  // };
 
   return (
     <main>
@@ -46,7 +44,12 @@ export default function BlogPage() {
                 <nav className="blog-pagination justify-content-center d-flex">
                   <ul className="pagination">
                     <li className="page-item">
-                      <button onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 0} className="page-link" aria-label="Previous">
+                      <button
+                        onClick={() => handlePageClick(currentPage - 1)}
+                        disabled={currentPage === 0}
+                        className="page-link"
+                        aria-label="Previous"
+                      >
                         <i className="ti-angle-left"></i>
                       </button>
                     </li>
@@ -56,7 +59,12 @@ export default function BlogPage() {
                       </button>
                     </li>
                     <li className="page-item">
-                      <button onClick={() => handlePageClick(currentPage + 1)} disabled={currentPage === pageCount - 1}  className="page-link" aria-label="Next">
+                      <button
+                        onClick={() => handlePageClick(currentPage + 1)}
+                        disabled={currentPage === pageCount - 1}
+                        className="page-link"
+                        aria-label="Next"
+                      >
                         <i className="ti-angle-right"></i>
                       </button>
                     </li>

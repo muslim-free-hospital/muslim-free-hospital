@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "../../utils/constant";
 
 const articlesApi = createApi({
   reducerPath: "articles",
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      "https://script.google.com/macros/s/AKfycbxLeOlkbLCXZwvD8t7UFWV_2XUprnZOdBxWjNUQbkAXWC0bFLyEJOLkrFuDc1h2MOr1",
+    baseUrl: BASE_URL,
   }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({

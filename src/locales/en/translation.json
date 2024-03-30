@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome to React",
+  "description": "This is a paragraph.",
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "services": "Services",
+    "blog": "Blog",
+    "doctors": "Doctors"
+  }
+}

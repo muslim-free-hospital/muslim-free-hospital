@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { navbar } from "../utils/constant";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation();
+  const [currentIcon, setCurrentIcon] = useState("mm");
+
+  console.log(i18n.language);
+  function handleLanguageChange(e) {
+    e.preventDefault();
+    if (i18n.language === "en") {
+      setCurrentIcon("en");
+      i18n.changeLanguage("mm");
+    } else {
+      setCurrentIcon("mm");
+      i18n.changeLanguage("en");
+    }
+  }
+
   return (
     <header>
       <div className="header-area">
@@ -9,9 +27,9 @@ export default function Navbar() {
             <div className="row align-items-center">
               <div className="col-xl-2 col-lg-2 col-md-1">
                 <div className="logo">
-                  <a href="index.html">
+                  <Link to={"/"}>
                     <img src="/img/logo/logo.png" alt="" />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-xl-10 col-lg-10 col-md-10">
@@ -20,41 +38,40 @@ export default function Navbar() {
                     <nav>
                       <ul id="navigation">
                         <li>
-                          <Link to="/">Home</Link>
+                          <Link to="/">{t(`navbar.${navbar.HOME}`)}</Link>
                         </li>
                         <li>
-                          <a href="about.html">About</a>
+                          <a href="/#about">{t(`navbar.${navbar.ABOUT}`)}</a>
                         </li>
                         <li>
-                          <a href="doctor.html">Doctors</a>
+                          <a href="/#services">
+                            {t(`navbar.${navbar.SERVICES}`)}
+                          </a>
                         </li>
                         <li>
-                          <a href="department.html">Department</a>
+                          <a href="/#doctors">
+                            {t(`navbar.${navbar.DOCTORS}`)}
+                          </a>
                         </li>
                         <li>
-                          <a href="blog.html">Blog</a>
-                          <ul className="submenu">
-                            <li>
-                              <Link to="/articles">Blog</Link>
-                            </li>
-                            <li>
-                              <a href="blog_details.html">Blog Details</a>
-                            </li>
-                            <li>
-                              <a href="elements.html">Element</a>
-                            </li>
-                          </ul>
+                          <Link to="/articles">
+                            {t(`navbar.${navbar.BLOG}`)}
+                          </Link>
                         </li>
                         <li>
-                          <a href="contact.html">Contact</a>
+                          <a href="/#contact">
+                            {t(`navbar.${navbar.CONTACT}`)}
+                          </a>
                         </li>
                       </ul>
                     </nav>
                   </div>
                   <div className="header-right-btn f-right d-none d-lg-block ml-30">
-                    <a href="#" className="btn header-btn">
-                      01654.066.456
-                    </a>
+                    <img
+                      onClick={handleLanguageChange}
+                      src={`/img/logo/${currentIcon}.png`}
+                      width={38}
+                    />
                   </div>
                 </div>
               </div>
